@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://81j5bckkh1u6"]
+
+[ext_resource type="Texture2D" uid="uid://b1jmmfokolwjp" path="res://PipeBody.png" id="1_4317m"]
+[ext_resource type="Texture2D" uid="uid://bv3qlr3fnvlv4" path="res://PipeCap.png" id="2_gjn34"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r71f6"]
+size = Vector2(96, 96)
+
+[node name="Obstacle" type="Node2D"]
+
+[node name="LowerPipe" type="Area2D" parent="."]
+position = Vector2(0, 300)
+
+[node name="Sprite" type="Sprite2D" parent="LowerPipe"]
+texture = ExtResource("1_4317m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerPipe"]
+shape = SubResource("RectangleShape2D_r71f6")
+
+[node name="UpperPipe" type="Area2D" parent="."]
+position = Vector2(0, -300)
+
+[node name="Sprite" type="Sprite2D" parent="UpperPipe"]
+texture = ExtResource("1_4317m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperPipe"]
+shape = SubResource("RectangleShape2D_r71f6")
+
+[node name="Caps" type="Node2D" parent="."]
+
+[node name="UpperCap" type="Sprite2D" parent="Caps"]
+position = Vector2(0, -30)
+texture = ExtResource("2_gjn34")
+
+[node name="LowerCap" type="Sprite2D" parent="Caps"]
+position = Vector2(0, 30)
+texture = ExtResource("2_gjn34")
+
+[node name="GapPos" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_4317m")

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bosiitluv3en1"]
+
+[ext_resource type="Script" path="res://Scripts/GameController.gd" id="2_n3sa7"]
+[ext_resource type="Texture2D" uid="uid://baho2wxyogflr" path="res://Ground.png" id="4_1fe7w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgogr"]
+size = Vector2(800.597, 101)
+
+[node name="MainScene" type="Node2D"]
+
+[node name="GameController" type="Node2D" parent="."]
+script = ExtResource("2_n3sa7")
+
+[node name="Camera2D" type="Camera2D" parent="GameController"]
+offset = Vector2(0, -324)
+
+[node name="Ground" type="Area2D" parent="GameController"]
+position = Vector2(-2, -3)
+scale = Vector2(1.675, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="GameController/Ground"]
+texture = ExtResource("4_1fe7w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Ground"]
+position = Vector2(0.298507, -2.5)
+shape = SubResource("RectangleShape2D_rgogr")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://beyghxwmh7m3r"]
+
+[ext_resource type="Script" path="res://Scripts/ObsController.gd" id="1_l74pl"]
+
+[node name="ObsController" type="Node2D"]
+z_index = 1
+script = ExtResource("1_l74pl")
