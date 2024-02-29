@@ -8,9 +8,9 @@ var imgSize : int = 32
 var obsScale : int = 4
 
 var obsTimer = 0.0
-var spawnTimer = 5.0
+var spawnTimer = 3.0
 
-var obsSpeed = 120
+var obsSpeed = 200
 var obsGap = 200
 var obsGapPos
 
@@ -53,25 +53,29 @@ func _instObs():
 func _reset():
 	for o in obsList:
 		remove_child(o)
-		
-	obsTimer = 0
-	obsSpeed = 120
-	obsGap = 200
+	
 	_instObs()
 
 func _process(delta):
-	for o in obsList:
+	for i in obsList.size():
+		# Skip over invalid Indicies
+		if i >= obsList.size(): break
+		
+		# Current Object Being Manipulated
+		var o = obsList[i]
+		
 		# Move Obstacles at Determined Speed
 		o.position.x -= obsSpeed * delta
 		
-		# Instantate New Obstacle Based on Time
-		if obsTimer >= spawnTimer:
-			_instObs()
-			obsTimer = 0
-			
 		# Remove Obstacles Off Screen
 		if o.position.x < -(screenSize.x/2 + screenOffset):
-			remove_child(o)
+			obsList.remove_at(i)
+			o.queue_free()
+	
+	# Instantate New Obstacle Based on Time
+	if obsTimer >= spawnTimer:
+		_instObs()
+		obsTimer = 0
 	
 	# Increase Timer
 	obsTimer += delta
