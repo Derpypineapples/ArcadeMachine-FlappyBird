@@ -8,6 +8,13 @@ size = Vector2(96, 96)
 
 [node name="Obstacle" type="Node2D"]
 
+[node name="CrossCollider" type="Area2D" parent="."]
+position = Vector2(24, 0)
+scale = Vector2(0.5, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrossCollider"]
+shape = SubResource("RectangleShape2D_r71f6")
+
 [node name="LowerPipe" type="Area2D" parent="."]
 position = Vector2(0, 300)
 

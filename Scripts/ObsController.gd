@@ -1,11 +1,11 @@
 extends Node2D
 
-var screenSize : Vector2
+var screenSize: Vector2
 var obstacle = preload("res://Objects/obstacle.tscn")
 var obsList = []
 
-var imgSize : int = 32
-var obsScale : int = 4
+var imgSize: int = 32
+var obsScale: int = 4
 
 var obsTimer = 0.0
 var spawnTimer = 3.0
@@ -14,8 +14,12 @@ var obsSpeed = 200
 var obsGap = 200
 var obsGapPos
 
-var screenOffset : int = 50
+var screenOffset: int = 50
+
+var player_x: float
+
 func _ready():
+	player_x = GameController.player.position.x
 	_instObs()
 
 # Instantiate new obstacle off screen & append to list
@@ -38,6 +42,9 @@ func _instObs():
 				
 		elif c.name == "GapPos":
 			c.position.y = obsGapPos
+		
+		elif c.name == "CrossCollider":
+			c.scale.y = screenSize.y
 			
 		else:
 			var sign: int = c.position.y / abs(c.position.y)

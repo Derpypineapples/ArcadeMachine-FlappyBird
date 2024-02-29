@@ -6,20 +6,22 @@ var obsControllerInst = preload("res://Objects/obs_controller.tscn")
 var player
 var obsController
 
+var debug_var = "Debug Variable"
+
+var score: int = 0
+
 func _ready():
-	#GameController = self
 	player = playerInst.instantiate() 
 	obsController = obsControllerInst.instantiate()
+	
 	add_child(player)
 	add_child(obsController)
-	debug()
-	player.get_script()._reset()
+	
+	player._reset()
 
-func debug():
-	print("Running Debug Func in Script")
-
+# End Game And Broadcast Reset to Player and Obstacle Controller
 func _end_game():
-	print("Ending Game...")
-	#obsController.get_script()._reset()
-	player.get_script()._reset()
+	obsController._reset()
+	player._reset()
+	score = 0
 	pass
