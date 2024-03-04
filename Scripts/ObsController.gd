@@ -61,6 +61,8 @@ func _reset():
 	for o in obsList:
 		remove_child(o)
 	
+	obsTimer = 0.0
+	
 	_instObs()
 
 func _process(delta):
