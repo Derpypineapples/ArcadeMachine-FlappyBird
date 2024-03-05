@@ -13,6 +13,7 @@ var spawnTimer = 3.0
 var obsSpeed = 200
 var obsGap = 200
 var obsGapPos
+var movement_toggle: bool = false
 
 var screenOffset: int = 50
 
@@ -57,15 +58,22 @@ func _instObs():
 	add_child(obsInst)
 	obsList.append(obsInst) 
 
-func _reset():
+func reset():
 	for o in obsList:
 		remove_child(o)
 	
+	movement_toggle = true
 	obsTimer = 0.0
 	
 	_instObs()
 
+func toggle_movement(toggle: bool):
+	movement_toggle = toggle
+
 func _process(delta):
+	# Disable All Movement Related Activities
+	if !movement_toggle: return
+	
 	for i in obsList.size():
 		# Skip over invalid Indicies
 		if i >= obsList.size(): break

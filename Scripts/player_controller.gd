@@ -5,20 +5,26 @@ var grav: float = 9.81
 var jumpStr: float = -5.0
 var screenSize
 
+var movement_toggle
+var idle_toggle: bool = true
+
+var current_time = Time.get_time_dict_from_system()
+
 func _ready():
 	screenSize = get_viewport_rect().size
+	movement_toggle = false
 
 # Reset Player to Origin
-func _reset():
+func reset():
 	print("Reseting Player to Origin...")
+	movement_toggle = true
 	velocity = Vector2(0, 0)
 	position = Vector2(-200, -screenSize.y/2 - 150)
 
-func _process(delta):
-	# Close Game
-	if Input.is_key_pressed(KEY_ALT):
-		get_tree().quit()
-	
+func toggle_movement(toggle: bool):
+	movement_toggle = toggle
+
+func _movement(delta):
 	# Keep Player Under Ceiling, Acting as Barrier
 	if position.y <= -screenSize.y && velocity.y < 0:
 		position.y = -screenSize.y
@@ -26,7 +32,19 @@ func _process(delta):
 	else:
 		position += velocity
 
+func _idle_movement(delta):
+	position.y = sin(Time.get_time_dict_from_system()["second"])
+
+func _process(delta):
+	# Close Game
+	if Input.is_key_pressed(KEY_ALT):
+		get_tree().quit()
+	
+	if movement_toggle: _movement(delta)
+	elif idle_toggle: _idle_movement(delta)
+
 func _physics_process(delta):
+	if !movement_toggle: return
 	# Add Velocity to Player
 	if Input.is_action_just_pressed("jump"):
 		velocity.y = jumpStr
