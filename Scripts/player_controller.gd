@@ -17,12 +17,14 @@ func _ready():
 # Reset Player to Origin
 func reset():
 	print("Reseting Player to Origin...")
-	movement_toggle = true
+	if !idle_toggle:
+		movement_toggle = true
 	velocity = Vector2(0, 0)
-	position = Vector2(-200, -screenSize.y/2 - 150)
+	position = Vector2(-100, -screenSize.y/2 - 150)
 
 func toggle_movement(toggle: bool):
 	movement_toggle = toggle
+	idle_toggle = false
 
 func _movement(delta):
 	# Keep Player Under Ceiling, Acting as Barrier
@@ -31,9 +33,9 @@ func _movement(delta):
 	# Vertical Player Movement When Possible
 	else:
 		position += velocity
-
+		
 func _idle_movement(delta):
-	position.y = sin(Time.get_time_dict_from_system()["second"])
+	position.y = sin(Time.get_unix_time_from_system() * 1.5) * 75 - screenSize.y/2
 
 func _process(delta):
 	# Close Game
