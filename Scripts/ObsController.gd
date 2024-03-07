@@ -7,21 +7,42 @@ var obsList = []
 var imgSize: int = 32
 var obsScale: int = 4
 
-var obsTimer = 0.0
-var spawnTimer = 3.0
-
-var obsSpeed = 200
-var obsGap = 200
-var obsGapPos
-var movement_toggle: bool = false
-
-var screenOffset: int = 50
+var screenOffset: int = 60
 
 var player_x: float
 
+var obsTimer
+var spawnTimer
+var obsSpeed
+var obsGap
+var movement_toggle: bool = false
+
+var obsGapPos
+
 func _ready():
 	player_x = GameController.player.position.x
+	_set_variables()
+	movement_toggle = false
 	_instObs()
+
+# Set All Variables That Aren't Constant
+func _set_variables():
+	obsTimer = 0.0
+	spawnTimer = 3.0
+	obsSpeed = 180
+	obsGap = 200
+	movement_toggle = true
+
+# Update Variables Based on Score
+func update_variables(score: int):
+	if score < 5:
+		if obsGap > 130:
+			obsGap = obsGap - score * 3
+		else: obsGap = 130
+	if score < 20:
+		obsSpeed = obsSpeed + score * 5
+		spawnTimer = spawnTimer - score * 0.1
+	pass
 
 # Instantiate new obstacle off screen & append to list
 func _instObs():
@@ -62,9 +83,7 @@ func reset():
 	for o in obsList:
 		remove_child(o)
 	
-	movement_toggle = true
-	obsTimer = 0.0
-	
+	_set_variables()
 	_instObs()
 
 func toggle_movement(toggle: bool):

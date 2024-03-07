@@ -57,7 +57,7 @@ func _collided(area):
 	print("Enter Collision With Object:", area.name)
 	if area.name == "CrossCollider":
 		print("Player Crossed Pipes")
-		GameController.score += 1
+		GameController.update_score()
 		print(GameController.score)
 	else:
 		print("Player Collided With Pipes")

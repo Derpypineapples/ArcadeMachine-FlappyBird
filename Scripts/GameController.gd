@@ -30,6 +30,10 @@ func _end_game():
 	player.toggle_movement(false)
 	uiController.toggle_screen(1, true)
 
+func update_score():
+	score += 1
+	obsController.update_variables(score)
+
 func restart_game():
 	obsController.reset()
 	player.reset()
