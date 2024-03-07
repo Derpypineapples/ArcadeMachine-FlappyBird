@@ -37,11 +37,10 @@ func _set_variables():
 func update_variables(score: int):
 	if score < 5:
 		if obsGap > 130:
-			obsGap = obsGap - score * 3
+			obsGap -= 5
 		else: obsGap = 130
-	if score < 20:
-		obsSpeed = obsSpeed + score * 5
-		spawnTimer = spawnTimer - score * 0.1
+		obsSpeed += 1
+		spawnTimer -= 0.01
 	pass
 
 # Instantiate new obstacle off screen & append to list
