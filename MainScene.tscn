@@ -1,24 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://bosiitluv3en1"]
+[gd_scene load_steps=6 format=3 uid="uid://bosiitluv3en1"]
 
 [ext_resource type="Texture2D" uid="uid://b5tx6yabauteg" path="res://wp6956942-flappy-bird-wallpapers.png" id="2_qnxfc"]
+[ext_resource type="Script" path="res://Scripts/ParallaxAutosroll.gd" id="3_8eqti"]
+[ext_resource type="Texture2D" uid="uid://besyyrgigxirj" path="res://background_paralax_lower.png" id="3_8gc0o"]
 [ext_resource type="Texture2D" uid="uid://baho2wxyogflr" path="res://Ground.png" id="4_1fe7w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgogr"]
 size = Vector2(800.597, 101)
 
 [node name="MainScene" type="Node2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = -1
-position = Vector2(30.1113, -282.187)
-scale = Vector2(0.705208, 0.705208)
-texture = ExtResource("2_qnxfc")
+metadata/_edit_vertical_guides_ = [946.0, -2259.0]
+metadata/_edit_horizontal_guides_ = [684.0]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -324)
+offset = Vector2(0, -376.67)
 
 [node name="Ground" type="Area2D" parent="."]
-position = Vector2(-2, -3)
+position = Vector2(0, -30)
 scale = Vector2(2.675, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Ground"]
@@ -28,3 +26,30 @@ texture = ExtResource("4_1fe7w")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 position = Vector2(0.298507, -2.5)
 shape = SubResource("RectangleShape2D_rgogr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Ground"]
+z_index = -1
+position = Vector2(0, -373.187)
+scale = Vector2(0.373832, 1)
+texture = ExtResource("2_qnxfc")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Ground"]
+visible = false
+scroll_ignore_camera_zoom = true
+script = ExtResource("3_8eqti")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Ground/ParallaxBackground"]
+position = Vector2(0, -30)
+scale = Vector2(2.675, 1)
+motion_mirroring = Vector2(1080, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/ParallaxBackground/ParallaxLayer"]
+position = Vector2(5.00679e-06, -208)
+scale = Vector2(0.373832, 1)
+texture = ExtResource("3_8gc0o")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Ground/ParallaxBackground"]
+position = Vector2(0, -60)
+scale = Vector2(7.15562, 1)
+motion_scale = Vector2(0, 1)
+motion_mirroring = Vector2(1080, 0)

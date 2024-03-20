@@ -33,6 +33,11 @@ func _movement(delta):
 	# Vertical Player Movement When Possible
 	else:
 		position += velocity
+	
+	# Player Rotation
+	var r: float = -clamp(velocity.y / (jumpStr/2), -1.5, 1)
+	print(r)
+	rotation = PI/6  * r
 		
 func _idle_movement(delta):
 	position.y = sin(Time.get_unix_time_from_system() * 1.5) * 75 - screenSize.y/2

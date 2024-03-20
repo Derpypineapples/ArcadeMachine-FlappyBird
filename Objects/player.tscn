@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://v1wl727wb0ec"]
 
 [ext_resource type="Script" path="res://Scripts/player_controller.gd" id="1_ln26a"]
-[ext_resource type="Texture2D" uid="uid://bs1xboxv1vrbd" path="res://icon.svg" id="1_n1n4m"]
+[ext_resource type="Texture2D" uid="uid://c48nlybt5rfnb" path="res://Bird.png" id="2_bdesi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_80tbv"]
 radius = 65.7647
@@ -12,7 +12,9 @@ scale = Vector2(0.4, 0.4)
 script = ExtResource("1_ln26a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_n1n4m")
+position = Vector2(7.5, -2.5)
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("2_bdesi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.999999, 0.999999)
